@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>DriveX — Premium Car Rental</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+    :root {
+      --bg: #f7f8fc;
+      --dark: #10131c;
+      --muted: #6d7280;
+      --purple: #6c4df6;
+      --pink: #ff4f9a;
+      --cyan: #20c8d8;
+      --yellow: #ffd84d;
+      --white: #ffffff;
+      --border: rgba(16, 19, 28, 0.08);
+      --shadow: 0 20px 60px rgba(35, 30, 80, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    /* ================= NAVBAR ================= */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 18px 6%;
+      transition: 0.3s;
+    }
+
+    header.scrolled {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .nav {
+      max-width: 1300px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Space Grotesk";
+      font-size: 25px;
+      font-weight: 700;
+      color: var(--dark);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      box-shadow: 0 8px 25px rgba(108, 77, 246, 0.3);
+    }
+
+    nav {
+      display: flex;
+      gap: 35px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #444957;
+      font-weight: 600;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--purple);
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .login {
+      border: 0;
+      background: transparent;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 10px 15px;
+    }
+
+    .signup {
+      border: 0;
+      background: var(--dark);
+      color: white;
+      padding: 11px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .menu {
+      display: none;
+      border: 0;
+      background: none;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      min-height: 780px;
+      padding: 150px 6% 80px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(255, 79, 154, 0.20), transparent 25%),
+        radial-gradient(circle at 10% 80%, rgba(32, 200, 216, 0.16), transparent 25%),
+        linear-gradient(135deg, #fff 0%, #f4f1ff 100%);
+    }
+
+    .hero-container {
+      max-width: 1300px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border: 1px solid var(--border);
+      padding: 9px 14px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--purple);
+      box-shadow: 0 8px 30px rgba(50, 40, 100, 0.06);
+      margin-bottom: 25px;
+    }
+
+    .badge span {
+      width: 8px;
+      height: 8px;
+      background: #31d17b;
+      border-radius: 50%;
+      box-shadow: 0 0 0 5px rgba(49, 209, 123, 0.12);
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 6vw, 78px);
+      line-height: 0.98;
+      letter-spacing: -4px;
+      margin-bottom: 25px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-description {
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.7;
+      font-size: 17px;
+      margin-bottom: 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .primary-btn {
+      border: 0;
+      color: white;
+      padding: 15px 24px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--purple), #8d68ff);
+      box-shadow: 0 12px 30px rgba(108, 77, 246, 0.28);
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.25s;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 35px rgba(108, 77, 246, 0.35);
+    }
+
+    .secondary-btn {
+      border: 0;
+      background: white;
+      padding: 15px 22px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    /* ================= HERO CAR ================= */
+
+    .hero-visual {
+      position: relative;
+      min-height: 500px;
+      display: grid;
+      place-items: center;
+    }
+
+    .blob {
+      width: 480px;
+      height: 480px;
+      border-radius: 45% 55% 55% 45%;
+      background: linear-gradient(
+        135deg,
+        rgba(108, 77, 246, 0.16),
+        rgba(255, 79, 154, 0.18)
+      );
+      position: absolute;
+      animation: morph 8s ease-in-out infinite;
+    }
+
+    @keyframes morph {
+      0%, 100% {
+        border-radius: 45% 55% 55% 45%;
+      }
+
+      50% {
+        border-radius: 60% 40% 45% 55%;
+      }
+    }
+
+    .car-image {
+      position: relative;
+      width: min(700px, 100%);
+      filter: drop-shadow(0 35px 25px rgba(35, 25, 80, 0.22));
+      animation: float 4s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    .floating-card {
+      position: absolute;
+      z-index: 5;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.8);
+      border-radius: 18px;
+      padding: 15px 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .rating-card {
+      left: 3%;
+      top: 20%;
+    }
+
+    .price-card {
+      right: 5%;
+      bottom: 15%;
+    }
+
+    .stars {
+      color: #ffb800;
+      letter-spacing: 2px;
+    }
+
+    .floating-card small {
+      color: var(--muted);
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .floating-card strong {
+      font-size: 18px;
+    }
+
+    /* ================= SEARCH ================= */
+
+    .search-wrapper {
+      position: relative;
+      margin-top: -65px;
+      z-index: 20;
+      padding: 0 6%;
+    }
+
+    .search-box {
+      max-width: 1180px;
+      margin: auto;
+      background: white;
+      padding: 18px;
+      border-radius: 22px;
+      box-shadow: 0 20px 60px rgba(30, 25, 70, 0.14);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr) auto;
+      gap: 10px;
+    }
+
+    .search-field {
+      padding: 8px 14px;
+      border-right: 1px solid #eee;
+    }
+
+    .search-field label {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      margin-bottom: 5px;
+    }
+
+    .search-field input,
+    .search-field select {
+      width: 100%;
+      border: 0;
+      outline: none;
+      background: transparent;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .search-btn {
+      border: 0;
+      background: var(--dark);
+      color: white;
+      padding: 0 25px;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    /* ================= SECTION ================= */
+
+    .section {
+      max-width: 1300px;
+      margin: auto;
+      padding: 110px 6% 50px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      margin-bottom: 35px;
+    }
+
+    .eyebrow {
+      color: var(--purple);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .section h2 {
+      font-size: 42px;
+      letter-spacing: -2px;
+    }
+
+    .view-all {
+      color: var(--purple);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    /* ================= FILTER ================= */
+
+    .filters {
+      display: flex;
+      gap: 9px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    .filter {
+      border: 1px solid var(--border);
+      background: white;
+      padding: 9px 17px;
+      border-radius: 100px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #555b6c;
+    }
+
+    .filter.active,
+    .filter:hover {
+      background: var(--dark);
+      color: white;
+    }
+
+    /* ================= CARS ================= */
+
+    .cars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .car-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 23px;
+      padding: 13px;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .car-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow);
+    }
+
+    .car-picture {
+      height: 230px;
+      border-radius: 17px;
+      background: linear-gradient(135deg, #f0efff, #f8e9f2);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .car-picture img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.4s;
+    }
+
+    .car-card:hover .car-picture img {
+      transform: scale(1.05);
+    }
+
+    .car-info {
+      padding: 18px 7px 8px;
+    }
+
+    .car-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .car-title h3 {
+      font-size: 20px;
+    }
+
+    .heart {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: white;
+      cursor: pointer;
+    }
+
+    .heart.liked {
+      background: #ffe5ef;
+      color: #ff3d89;
+    }
+
+    .car-meta {
+      display: flex;
+      gap: 15px;
+      color: var(--muted);
+      font-size: 13px;
+      margin: 9px 0 17px;
+    }
+
+    .car-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .price span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .rent-btn {
+      border: 0;
+      background: #eeeaff;
+      color: var(--purple);
+      padding: 10px 15px;
+      border-radius: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .rent-btn:hover {
+      background: var(--purple);
+      color: white;
+    }
+
+    /* ================= FEATURES ================= */
+
+    .features {
+      background: var(--dark);
+      color: white;
+      border-radius: 35px;
+      max-width: 1300px;
+      margin: 90px auto;
+      padding: 70px 6%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .features::before {
+      content: "";
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: rgba(108,77,246,0.35);
+      filter: blur(80px);
+      right: -100px;
+      top: -100px;
+    }
+
+    .features h2 {
+      font-size: 42px;
+      max-width: 600px;
+      margin-bottom: 45px;
+      position: relative;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      position: relative;
+    }
+
+    .feature {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 25px;
+      border-radius: 20px;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,0.12);
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .feature h3 {
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: #aeb2bf;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      padding: 60px 6% 30px;
+      background: #0a0c12;
+      color: white;
+    }
+
+    .footer-inner {
+      max-width: 1300px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 50px;
+    }
+
+    .footer-logo {
+      color: white;
+    }
+
+    footer p {
+      color: #858998;
+      line-height: 1.7;
+      margin-top: 15px;
+      max-width: 330px;
+    }
+
+    footer h4 {
+      margin-bottom: 18px;
+    }
+
+    footer a {
+      display: block;
+      color: #858998;
+      text-decoration: none;
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    .copyright {
+      max-width: 1300px;
+      margin: 50px auto 0;
+      padding-top: 25px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: #666a78;
+      font-size: 13px;
+    }
+
+    /* ================= MODAL ================= */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 12, 18, 0.65);
+      backdrop-filter: blur(8px);
+      display: none;
+      place-items: center;
+      z-index: 2000;
+      padding: 20px;
+    }
+
+    .modal.show {
+      display: grid;
+    }
+
+    .modal-box {
+      background: white;
+      width: min(480px, 100%);
+      border-radius: 25px;
+      padding: 30px;
+      position: relative;
+      animation: modalIn 0.3s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .close {
+      position: absolute;
+      right: 20px;
+      top: 18px;
+      border: 0;
+      background: #f2f2f4;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .modal-box h2 {
+      margin-bottom: 8px;
+    }
+
+    .modal-box p {
+      color: var(--muted);
+      margin-bottom: 25px;
+    }
+
+    .modal-input {
+      margin-bottom: 15px;
+    }
+
+    .modal-input label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .modal-input input,
+    .modal-input select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 11px;
+      outline: none;
+    }
+
+    .confirm {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 1000px) {
+      nav {
+        display: none;
+      }
+
+      .menu {
+        display: block;
+      }
+
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .search-box {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .search-btn {
+        padding: 15px;
+      }
+
+      .cars-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      header {
+        padding: 15px 5%;
+      }
+
+      .nav-actions {
+        display: none;
+      }
+
+      .hero {
+        padding: 125px 5% 70px;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+        letter-spacing: -2px;
+      }
+
+      .hero-visual {
+        min-height: 330px;
+      }
+
+      .blob {
+        width: 300px;
+        height: 300px;
+      }
+
+      .floating-card {
+        transform: scale(0.85);
+      }
+
+      .search-wrapper {
+        margin-top: -30px;
+        padding: 0 5%;
+      }
+
+      .search-box {
+        grid-template-columns: 1fr;
+      }
+
+      .search-field {
+        border-right: 0;
+        border-bottom: 1px solid #eee;
+        padding: 10px;
+      }
+
+      .section {
+        padding: 75px 5% 30px;
+      }
+
+      .section-header {
+        display: block;
+      }
+
+      .section h2 {
+        font-size: 34px;
+        margin-bottom: 15px;
+      }
+
+      .cars-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .features {
+        margin: 60px 5%;
+        padding: 50px 25px;
+      }
+
+      .features h2 {
+        font-size: 34px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <header id="header">
+    <div class="nav">
+
+      <a href="#" class="logo">
+        <div class="logo-icon">D</div>
+        DriveX
+      </a>
+
+      <nav>
+        <a href="#cars">Cars</a>
+        <a href="#features">Why DriveX</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="login" onclick="showLogin()">Log in</button>
+        <button class="signup" onclick="scrollToSearch()">Rent a car</button>
+      </div>
+
+      <button class="menu">☰</button>
+
+    </div>
+  </header>
+
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-container">
+
+      <div class="hero-content">
+
+        <div class="badge">
+          <span></span>
+          Premium cars. Simple rentals.
+        </div>
+
+        <h1>
+          Your next
+          <span class="gradient-text">adventure</span>
+          starts here.
+        </h1>
+
+        <p class="hero-description">
+          Discover premium cars at prices you'll love.
+          Pick your ride, choose your dates, and hit the road.
+          No complicated process.
+        </p>
+
+        <div class="hero-buttons">
+          <button class="primary-btn" onclick="scrollToSearch()">
+            Find your car →
+          </button>
+
+          <button class="secondary-btn" onclick="document.getElementById('cars').scrollIntoView()">
+            Explore fleet
+          </button>
+        </div>
+
+      </div>
+
+
+      <div class="hero-visual">
+
+        <div class="blob"></div>
+
+        <img
+          class="car-image"
+          src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1100&q=85"
+          alt="Premium sports car"
+        />
+
+        <div class="floating-card rating-card">
+          <small>Customer rating</small>
+          <div class="stars">★★★★★</div>
+          <strong>4.9 / 5.0</strong>
+        </div>
+
+        <div class="floating-card price-card">
+          <small>Starting from</small>
+          <strong>₹1,999 / day</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SEARCH -->
+
+  <div class="search-wrapper" id="search">
+
+    <div class="search-box">
+
+      <div class="search-field">
+        <label>Location</label>
+        <input type="text" id="location" placeholder="City or airport">
+      </div>
+
+      <div class="search-field">
+        <label>Pick-up date</label>
+        <input type="date" id="pickup">
+      </div>
+
+      <div class="search-field">
+        <label>Return date</label>
+        <input type="date" id="return">
+      </div>
+
+      <div class="search-field">
+        <label>Car type</label>
+        <select id="carType">
+          <option value="all">All cars</option>
+          <option value="sedan">Sedan</option>
+          <option value="suv">SUV</option>
+          <option value="luxury">Luxury</option>
+        </select>
+      </div>
+
+      <button class="search-btn" onclick="searchCars()">
+        Search
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- CARS -->
+
+  <section class="section" id="cars">
+
+    <div class="section-header">
+
+      <div>
+        <div class="eyebrow">Our fleet</div>
+        <h2>Choose your ride.</h2>
+      </div>
+
+      <a href="#" class="view-all">View all →</a>
+
+    </div>
+
+
+    <div class="filters">
+
+      <button class="filter active" data-filter="all">
+        All
+      </button>
+
+      <button class="filter" data-filter="sedan">
+        Sedan
+      </button>
+
+      <button class="filter" data-filter="suv">
+        SUV
+      </button>
+
+      <button class="filter" data-filter="luxury">
+        Luxury
+      </button>
+
+    </div>
+
+
+    <div class="cars-grid">
+
+
+      <!-- CAR 1 -->
+
+      <article class="car-card" data-category="luxury">
+
+        <div class="car-picture">
+          <img
+            src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=900&q=80"
+            alt="Mercedes"
+          >
+        </div>
+
+        <div class="car-info">
+
+          <div class="car-title">
+            <h3>Mercedes AMG</h3>
+
+            <button class="heart" onclick="toggleHeart(this)">
+              ♡
+            </button>
+          </div>
+
+          <div class="car-meta">
+            <span>⚡ Automatic</span>
+            <span>👤 5 Seats</span>
+          </div>
+
+          <div class="car-bottom">
+
+            <div class="price">
+              ₹6,499 <span>/ day</span>
+            </div>
+
+            <button class="rent-btn"
+              onclick="openBooking('Mercedes AMG')">
+              Rent now
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- CAR 2 -->
+
+      <article class="car-card" data-category="suv">
+
+        <div class="car-picture">
+          <img
+            src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=900&q=80"
+            alt="BMW SUV"
+          >
+        </div>
+
+        <div class="car-info">
+
+          <div class="car-title">
+            <h3>BMW X5</h3>
+
+            <button class="heart" onclick="toggleHeart(this)">
+              ♡
+            </button>
+          </div>
+
+          <div class="car-meta">
+            <span>⚡ Automatic</span>
+            <span>👤 5 Seats</span>
+          </div>
+
+          <div class="car-bottom">
+
+            <div class="price">
+              ₹5,299 <span>/ day</span>
+            </div>
+
+            <button class="rent-btn"
+              onclick="openBooking('BMW X5')">
+              Rent now
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- CAR 3 -->
+
+      <article class="car-card" data-category="sedan">
+
+        <div class="car-picture">
+          <img
+            src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=900&q=80"
+            alt="BMW Sedan"
+          >
+        </div>
+
+        <div class="car-info">
+
+          <div class="car-title">
+            <h3>BMW 5 Series</h3>
+
+            <button class="heart" onclick="toggleHeart(this)">
+              ♡
+            </button>
+          </div>
+
+          <div class="car-meta">
+            <span>⚡ Automatic</span>
+            <span>👤 5 Seats</span>
+          </div>
+
+          <div class="car-bottom">
+
+            <div class="price">
+              ₹4,499 <span>/ day</span>
+            </div>
+
+            <button class="rent-btn"
+              onclick="openBooking('BMW 5 Series')">
+              Rent now
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- CAR 4 -->
+
+      <article class="car-card" data-category="suv">
+
+        <div class="car-picture">
+          <img
+            src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=900&q=80"
+            alt="Range Rover"
+          >
+        </div>
+
+        <div class="car-info">
+
+          <div class="car-title">
+            <h3>Range Rover</h3>
+
+            <button class="heart" onclick="toggleHeart(this)">
+              ♡
+            </button>
+          </div>
+
+          <div class="car-meta">
+            <span>⚡ Automatic</span>
+            <span>👤 5 Seats</span>
+          </div>
+
+          <div class="car-bottom">
+
+            <div class="price">
+              ₹7,999 <span>/ day</span>
+            </div>
+
+            <button class="rent-btn"
+              onclick="openBooking('Range Rover')">
+              Rent now
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- CAR 5 -->
+
+      <article class="car-card" data-category="sedan">
+
+        <div class="car-picture">
+          <img
+            src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=900&q=80"
+            alt="Audi"
+          >
+        </div>
+
+        <div class="car-info">
+
+          <div class="car-title">
+            <h3>Audi A6</h3>
+
+            <button class="heart" onclick="toggleHeart(this)">
+              ♡
+            </button>
+          </div>
+
+          <div class="car-meta">
+            <span>⚡ Automatic</span>
+            <span>👤 5 Seats</span>
+          </div>
+
+          <div class="car-bottom">
+
+            <div class="price">
+              ₹4,799 <span>/ day</span>
+            </div>
+
+            <button class="rent-btn"
+              onclick="openBooking('Audi A6')">
+              Rent now
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- CAR 6 -->
+
+      <article class="car-card" data-category="luxury">
+
+        <div class="car-picture">
+          <img
+            src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=900&q=80"
+            alt="Porsche"
+          >
+        </div>
+
+        <div class="car-info">
+
+          <div class="car-title">
+            <h3>Porsche 911</h3>
+
+            <button class="heart" onclick="toggleHeart(this)">
+              ♡
+            </button>
+          </div>
+
+          <div class="car-meta">
+            <span>⚡ Automatic</span>
+            <span>👤 2 Seats</span>
+          </div>
+
+          <div class="car-bottom">
+
+            <div class="price">
+              ₹9,499 <span>/ day</span>
+            </div>
+
+            <button class="rent-btn"
+              onclick="openBooking('Porsche 911')">
+              Rent now
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- FEATURES -->
+
+  <section class="features" id="features">
+
+    <div class="eyebrow">Why DriveX</div>
+
+    <h2>
+      Everything you need for a smoother journey.
+    </h2>
+
+    <div class="feature-grid">
+
+      <div class="feature">
+        <div class="feature-icon">🚗</div>
+        <h3>Premium fleet</h3>
+        <p>
+          Carefully selected cars that are clean,
+          comfortable and road-ready.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <h3>Fast booking</h3>
+        <p>
+          Find your car and complete your booking
+          in just a few minutes.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🛡️</div>
+        <h3>Fully protected</h3>
+        <p>
+          Drive confidently with transparent
+          protection and support.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">📍</div>
+        <h3>Flexible pickup</h3>
+        <p>
+          Choose a convenient pickup location
+          and start your journey your way.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer id="contact">
+
+    <div class="footer-inner">
+
+      <div>
+
+        <a href="#" class="logo footer-logo">
+          <div class="logo-icon">D</div>
+          DriveX
+        </a>
+
+        <p>
+          Premium car rentals made simple.
+          Find your perfect ride and make
+          every journey memorable.
+        </p>
+
+      </div>
+
+      <div>
+        <h4>Explore</h4>
+        <a href="#cars">Our cars</a>
+        <a href="#features">Why DriveX</a>
+        <a href="#">Locations</a>
+        <a href="#">Offers</a>
+      </div>
+
+      <div>
+        <h4>Company</h4>
+        <a href="#about">About us</a>
+        <a href="#">Careers</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </div>
+
+      <div>
+        <h4>Support</h4>
+        <a href="#">Help center</a>
+        <a href="#">Rental policy</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © 2026 DriveX. All rights reserved.
+    </div>
+
+  </footer>
+
+
+  <!-- BOOKING MODAL -->
+
+  <div class="modal" id="bookingModal">
+
+    <div class="modal-box">
+
+      <button class="close" onclick="closeModal()">✕</button>
+
+      <div class="eyebrow">Reserve your ride</div>
+
+      <h2 id="selectedCar">Your car</h2>
+
+      <p>
+        Enter your details and we'll prepare your booking.
+      </p>
+
+      <div class="modal-input">
+        <label>Your name</label>
+        <input type="text" id="customerName" placeholder="John Doe">
+      </div>
+
+      <div class="modal-input">
+        <label>Email address</label>
+        <input type="email" id="customerEmail" placeholder="john@example.com">
+      </div>
+
+      <div class="modal-input">
+        <label>Pickup location</label>
+        <input type="text" placeholder="Enter location">
+      </div>
+
+      <button class="primary-btn confirm" onclick="confirmBooking()">
+        Confirm booking
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /* ================= NAVBAR ================= */
+
+    const header = document.getElementById("header");
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > 30) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+
+    });
+
+
+    /* ================= SEARCH ================= */
+
+    function scrollToSearch() {
+      document.getElementById("search").scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+    function searchCars() {
+
+      const location = document.getElementById("location").value;
+      const pickup = document.getElementById("pickup").value;
+      const returnDate = document.getElementById("return").value;
+
+      if (!location || !pickup || !returnDate) {
+        alert("Please enter your location and rental dates.");
+        return;
+      }
+
+      document.getElementById("cars").scrollIntoView({
+        behavior: "smooth"
+      });
+
+      alert(
+        `Searching available cars in ${location}...`
+      );
+    }
+
+
+    /* ================= FILTERS ================= */
+
+    const filters = document.querySelectorAll(".filter");
+    const cars = document.querySelectorAll(".car-card");
+
+    filters.forEach(filter => {
+
+      filter.addEventListener("click", () => {
+
+        filters.forEach(btn =>
+          btn.classList.remove("active")
+        );
+
+        filter.classList.add("active");
+
+        const category = filter.dataset.filter;
+
+        cars.forEach(car => {
+
+          if (
+            category === "all" ||
+            car.dataset.category === category
+          ) {
+            car.style.display = "block";
+          } else {
+            car.style.display = "none";
+          }
+
+        });
+
+      });
+
+    });
+
+
+    /* ================= HEART ================= */
+
+    function toggleHeart(button) {
+
+      button.classList.toggle("liked");
+
+      if (button.classList.contains("liked")) {
+        button.textContent = "♥";
+      } else {
+        button.textContent = "♡";
+      }
+
+    }
+
+
+    /* ================= BOOKING ================= */
+
+    const modal = document.getElementById("bookingModal");
+
+    function openBooking(car) {
+
+      document.getElementById("selectedCar").textContent = car;
+
+      modal.classList.add("show");
+
+      document.body.style.overflow = "hidden";
+
+    }
+
+    function closeModal() {
+
+      modal.classList.remove("show");
+
+      document.body.style.overflow = "auto";
+
+    }
+
+    function confirmBooking() {
+
+      const name =
+        document.getElementById("customerName").value;
+
+      const email =
+        document.getElementById("customerEmail").value;
+
+      if (!name || !email) {
+
+        alert("Please enter your name and email.");
+
+        return;
+
+      }
+
+      alert(
+        `Thanks ${name}! Your booking request has been received.`
+      );
+
+      closeModal();
+
+    }
+
+
+    /* ================= LOGIN ================= */
+
+    function showLogin() {
+
+      alert(
+        "Login functionality can be connected to your backend."
+      );
+
+    }
+
+
+    /* ================= CLOSE MODAL ================= */
+
+    modal.addEventListener("click", (event) => {
+
+      if (event.target === modal) {
+        closeModal();
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
+
+
